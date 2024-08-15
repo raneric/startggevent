@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     implementation(libs.apollographql.apollo)
     implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.material3.winsizeclass)
     kapt(libs.dagger.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
