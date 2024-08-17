@@ -1,0 +1,15 @@
+query TournamentsByCountry($perPage: Int!) {
+    tournaments(query: {
+        perPage: $perPage
+    }) {
+        nodes {
+            id
+            name
+            countryCode
+            eventRegistrationClosesAt
+            images {
+                url
+            }
+        }
+    }
+}

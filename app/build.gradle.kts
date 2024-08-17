@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     implementation(libs.dagger.hilt.android)
     implementation(libs.apollographql.apollo)
+    implementation(libs.coil)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.material3.winsizeclass)
     kapt(libs.dagger.hilt.compiler)

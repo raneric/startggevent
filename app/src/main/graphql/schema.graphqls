@@ -1,0 +1,178 @@
+type Query {
+    currentUser: User
+    tournament(id: ID, slug: String): Tournament
+    tournaments(query: TournamentQuery!): TournamentConnection
+}
+
+input TournamentQuery {
+    page: Int
+    perPage: Int
+    sortBy: String
+}
+type Tournament {
+    id: ID
+    addrState: String
+    # Admin-only view of admins for this tournament
+    #
+    # Arguments
+    # roles: Which roles to show
+    admins(roles: [String]): [User]
+    city: String
+    countryCode: String
+    # When the tournament was created (unix timestamp)
+    createdAt: Timestamp
+    currency: String
+    # When the tournament ends
+    endAt: Timestamp
+    # When does event registration close
+    eventRegistrationClosesAt: Timestamp
+
+    # True if tournament has at least one offline event
+    hasOfflineEvents: Boolean
+    hasOnlineEvents: Boolean
+    hashtag: String
+    # Arguments
+    # type: [Not documented]
+    images(type: String): [Image]
+    # True if tournament has at least one online event
+    isOnline: Boolean
+    # Is tournament registration open
+    isRegistrationOpen: Boolean
+    lat: Float
+    lng: Float
+    mapsPlaceId: String
+    # The tournament name
+    name: String
+    # Number of attendees including spectators, if public
+    numAttendees: Int
+    # The user who created the tournament
+    owner: User
+
+    postalCode: String
+    primaryContact: String
+    primaryContactType: String
+    # Publishing settings for this tournament
+    # When does registration for the tournament end
+    registrationClosesAt: Timestamp
+    rules: String
+    # The short slug used to form the url
+    shortSlug: String
+    # The slug used to form the url
+    slug: String
+    # When the tournament Starts
+    startAt: Timestamp
+    # State of the tournament, can be ActivityState::CREATED, ActivityState::ACTIVE,
+    # or ActivityState::COMPLETED
+    state: Int
+
+    # When is the team creation deadline
+    teamCreationClosesAt: Timestamp
+
+    # The timezone of the tournament
+    timezone: String
+    # The type of tournament from TournamentType
+    tournamentType: Int
+    # When the tournament was last modified (unix timestamp)
+    updatedAt: Timestamp
+    # Build Tournament URL
+    #
+    # Arguments
+    # tab: Tournament tab to add to URL
+    # relative: Generate a relative URL. Defaults to true. Setting to
+    # false will generate an absolute URL
+    url(tab: String, relative: Boolean): String
+    venueAddress: String
+    venueName: String
+    # List of all waves in this tournament
+    waves: [Wave]
+}
+
+type User {
+
+    id: ID
+    bio: String
+    # Public facing user birthday that respects user publishing settings
+    birthday: String
+    # Uniquely identifying token for user. Same as the hashed part of the slug
+    discriminator: String
+    email: String
+    genderPronoun: String
+    # Arguments
+    # type: [Not documented]
+    images(type: String): [Image]
+
+    # Public facing user name that respects user publishing settings
+    name: String
+    # player for user
+    player: Player
+    slug: String
+    # Tournaments this user is organizing or competing in
+    #
+    # Arguments
+    # query: [Not documented]
+    tournaments(query: UserTournamentsPaginationQuery): TournamentConnection
+}
+
+type TournamentConnection {
+    pageInfo: PageInfo
+    nodes: [Tournament]
+}
+
+type Image {
+    id: ID
+    height: Float
+    ratio: Float
+    type: String
+    url: String
+    width: Float
+}
+
+type Player {
+    id: ID
+    gamerTag: String
+    prefix: String
+}
+
+type Wave {
+    id: ID
+    # The Wave Identifier
+    identifier: String
+    # Unix time the wave is scheduled to start.
+    startAt: Timestamp
+}
+
+input UserTournamentsPaginationQuery {
+    page: Int
+    # How many nodes to return for the page. Maximum value of 500
+    perPage: Int
+    sortBy: String
+    filter: UserTournamentsPaginationFilter
+}
+
+input UserTournamentsPaginationFilter {
+    past: Boolean
+    upcoming: Boolean
+    search: PaginationSearchType
+    videogameId: [ID]
+    tournamentView: String
+    excludeId: [ID]
+}
+
+input PaginationSearchType {
+    fieldsToSearch: [String]
+    searchString: String
+}
+
+type PageInfo {
+    total: Int
+    totalPages: Int
+    page: Int
+    perPage: Int
+    sortBy: String
+    filter: JSON
+}
+
+scalar Timestamp
+
+scalar JSON
+
