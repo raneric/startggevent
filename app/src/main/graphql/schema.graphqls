@@ -48,6 +48,8 @@ type Tournament {
     # The user who created the tournament
     owner: User
 
+    events(limit: Int, filter: EventFilter): [Event]
+
     postalCode: String
     primaryContact: String
     primaryContactType: String
@@ -141,6 +143,116 @@ type Wave {
     startAt: Timestamp
 }
 
+type Event {
+    id: ID
+    # How long before the event start will the check-in end (in seconds)
+    checkInBuffer: Int
+    # How long the event check-in will last (in seconds)
+    checkInDuration: Int
+    # Whether check-in is enabled for this event
+    checkInEnabled: Boolean
+    # Rough categorization of event tier, denoting relative importance in the
+    # competitive scene
+    competitionTier: Int
+    # When the event was created (unix timestamp)
+    createdAt: Timestamp
+    # Last date attendees are able to create teams for team events
+    deckSubmissionDeadline: Timestamp
+    # Maximum number of participants each Entrant can have
+    entrantSizeMax: Int @deprecated( reason: "Migrate to teamRosterSize" )
+    # Minimum number of participants each Entrant can have
+    entrantSizeMin: Int @deprecated( reason: "Migrate to teamRosterSize" )
+
+    # Whether the event has decks
+    hasDecks: Boolean
+    # Are player tasks enabled for this event
+    hasTasks: Boolean
+    # Arguments
+    # type: [Not documented]
+    images(type: String): [Image]
+    # Whether the event is an online event or not
+    isOnline: Boolean
+
+    # Markdown field for match rules/instructions
+    matchRulesMarkdown: String
+    # Title of event set by organizer
+    name: String
+    # Gets the number of entrants in this event
+    numEntrants: Int
+
+    # The phases that belong to an event.
+    #
+    # Arguments
+    # state: Filter phases by state. If not specified will default to
+    # all phases
+    # phaseId: Optionally only return results for this phase
+    # TO settings for prizing
+    prizingInfo: JSON
+    publishing: JSON
+    # Markdown field for event rules/instructions
+    rulesMarkdown: String
+    # Id of the event ruleset
+    rulesetId: Int
+    # Settings pulled from the event ruleset, if one exists
+    rulesetSettings: JSON @deprecated( reason: "Use ruleset" )
+
+    # Paginated stations on this event
+    #
+    # Arguments
+    # query: [Not documented]
+    # Last date attendees are able to create teams for team events
+    teamManagementDeadline: Timestamp
+    # If this is a teams event, returns whether or not teams can set custom names
+    teamNameAllowed: Boolean
+    # Team roster size requirements
+    tournament: Tournament
+    # The type of the event, whether an entrant will have one participant or multiple
+    type: Int
+    # When the event was last modified (unix timestamp)
+    updatedAt: Timestamp
+    # Whether the event uses the new EventSeeds for seeding
+    useEventSeeds: Boolean
+    # The entrant (if applicable) for a given user in this event
+    #
+    # Arguments
+    # userId: User to get entrant for. Defaults to currently logged
+    # in user.
+    userEntrant(userId: ID): Entrant
+    videogame: Videogame
+    # The waves being used by the event
+    #
+    # Arguments
+    # phaseId: Waves filtered by phaseId, returns all if not set.
+    waves(phaseId: ID): [Wave]
+}
+
+type Videogame {
+    id: ID
+
+    displayName: String
+    # Arguments
+    # type: [Not documented]
+    images(type: String): [Image]
+    name: String
+    slug: String
+}
+
+type EntrantConnection {
+    pageInfo: PageInfo
+    nodes: [Entrant]
+}
+
+type Entrant {
+    id: ID
+    event: Event
+    # Entrant's seed number in the first phase of the event.
+    initialSeedNum: Int
+    isDisqualified: Boolean
+    # The entrant name as it appears in bracket: gamerTag of the participant or team
+    # name
+    name: String
+}
+
 input UserTournamentsPaginationQuery {
     page: Int
     # How many nodes to return for the page. Maximum value of 500
@@ -161,6 +273,17 @@ input UserTournamentsPaginationFilter {
 input PaginationSearchType {
     fieldsToSearch: [String]
     searchString: String
+}
+
+input EventFilter {
+    videogameId: [ID]
+    type: [Int]
+    published: Boolean
+    id: ID
+    ids: [ID]
+    slug: String
+    fantasyEventId: ID
+    fantasyRosterHash: String
 }
 
 type PageInfo {

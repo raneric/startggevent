@@ -5,8 +5,10 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
+import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.cw.startggevent.utils.Destination
 
 
 @Composable
@@ -29,4 +31,15 @@ class StartGGEventAppState(
     val windowWidthSizeClass: WindowWidthSizeClass,
     val snackbarHostState: SnackbarHostState,
 ) {
+    val activeDestination
+        @Composable get() = navController.currentDestination?.activeItem ?: Destination.Home
 }
+
+val NavDestination.activeItem: Destination
+    get() {
+        return when (route) {
+            Destination.Tournament.route -> Destination.Tournament
+            Destination.Profile.route    -> Destination.Profile
+            else                         -> Destination.Home
+        }
+    }

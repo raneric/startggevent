@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.material3.winsizeclass)
+    implementation(libs.androidx.compose.fondation)
     kapt(libs.dagger.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
