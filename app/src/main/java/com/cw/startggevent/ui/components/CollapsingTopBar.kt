@@ -21,19 +21,22 @@ import com.cw.startggevent.ui.theme.primaryContainerLight
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun CollapsingTopAppBar(appBarState: CollapsingState, modifier: Modifier = Modifier) {
+fun CollapsingTopBar(shouldCollapseTopBar: Boolean, modifier: Modifier = Modifier) {
 
     SharedTransitionLayout(modifier) {
-        AnimatedContent(targetState = appBarState, label = "top bar animation") {
+        AnimatedContent(
+            targetState = shouldCollapseTopBar,
+            label = "top bar animation"
+        ) {
             when (it) {
-                CollapsingState.EXPANDED  -> {
+                false -> {
                     ExpandedTopAppBar(
                         sharedTransitionScope = this@SharedTransitionLayout,
                         animatedVisibilityScope = this@AnimatedContent
                     )
                 }
 
-                CollapsingState.COLLAPSED -> {
+                true  -> {
                     CollapsedTopAppBar(
                         sharedTransitionScope = this@SharedTransitionLayout,
                         animatedVisibilityScope = this@AnimatedContent

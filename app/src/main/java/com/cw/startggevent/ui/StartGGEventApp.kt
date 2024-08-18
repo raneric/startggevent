@@ -3,32 +3,36 @@ package com.cw.startggevent.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cw.startggevent.StartGGEventAppState
 import com.cw.startggevent.ui.components.BottomNavigation
-import com.cw.startggevent.ui.components.CollapsingState
-import com.cw.startggevent.ui.components.CollapsingTopAppBar
+import com.cw.startggevent.ui.components.CollapsingTopBar
 import com.cw.startggevent.ui.theme.StartGGEventTheme
 import com.cw.startggevent.ui.theme.primaryContainerLight
 
 @Composable
 fun StartGGEventApp(appState: StartGGEventAppState, modifier: Modifier = Modifier) {
-    var appBarState by remember {
-        mutableStateOf(CollapsingState.EXPANDED)
+
+    val scrollState = rememberLazyListState()
+
+    val shouldCollapseTopBar by remember {
+        derivedStateOf {
+            scrollState.firstVisibleItemIndex > 0
+        }
     }
 
     Scaffold(
         topBar = {
-            CollapsingTopAppBar(
-                appBarState = appBarState,
+            CollapsingTopBar(
+                shouldCollapseTopBar = shouldCollapseTopBar,
                 modifier = Modifier.safeContentPadding()
             )
         },
@@ -43,12 +47,9 @@ fun StartGGEventApp(appState: StartGGEventAppState, modifier: Modifier = Modifie
         },
         modifier = modifier
     ) { paddingValues ->
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
-
+        Surface(modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxSize()) {
         }
     }
 }

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -9,6 +11,7 @@ plugins {
 android {
     namespace = "com.cw.startggevent"
     compileSdk = 34
+    android.buildFeatures.buildConfig = true
 
     defaultConfig {
         applicationId = "com.cw.startggevent"
@@ -21,6 +24,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        val secureProperties = project.rootProject.file("secure.properties")
+        val properties = Properties()
+        properties.load(secureProperties.inputStream())
+        val apiToken = properties.getProperty("API_TOKEN") ?: ""
+        buildConfigField(type = "String", name = "API_TOKEN", value = apiToken)
     }
 
     buildTypes {
