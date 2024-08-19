@@ -1,8 +1,11 @@
 package com.cw.startggevent.ui
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -12,9 +15,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.cw.startggevent.StartGGEventAppState
 import com.cw.startggevent.ui.components.BottomNavigation
 import com.cw.startggevent.ui.components.CollapsingTopBar
+import com.cw.startggevent.ui.components.TournamentCard
 import com.cw.startggevent.ui.theme.StartGGEventTheme
 import com.cw.startggevent.ui.theme.primaryContainerLight
 
@@ -47,10 +52,20 @@ fun StartGGEventApp(appState: StartGGEventAppState, modifier: Modifier = Modifie
         },
         modifier = modifier
     ) { paddingValues ->
-        Surface(modifier = Modifier
-            .padding(paddingValues)
-            .fillMaxSize()) {
-        }
+  /*      Surface(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+        ) {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
+            ) {
+                items(8) {
+                    TournamentCard()
+                }
+            }
+        }*/
     }
 }
 

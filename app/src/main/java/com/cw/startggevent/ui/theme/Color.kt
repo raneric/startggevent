@@ -1,4 +1,5 @@
 package com.cw.startggevent.ui.theme
+
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF000000)
@@ -72,3 +73,6 @@ val surfaceContainerLowDark = Color(0xFF1B1C1D)
 val surfaceContainerDark = Color(0xFF1F2021)
 val surfaceContainerHighDark = Color(0xFF2A2A2B)
 val surfaceContainerHighestDark = Color(0xFF343536)
+
+val greenOkStatus = Color(0xFF0D8225)
+val redNOKStatus = Color(0XFFE0225B)

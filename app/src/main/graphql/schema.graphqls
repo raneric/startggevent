@@ -8,7 +8,38 @@ input TournamentQuery {
     page: Int
     perPage: Int
     sortBy: String
+    filter: TournamentPageFilter
 }
+
+input TournamentPageFilter {
+    id: ID
+    ids: [ID]
+    # ID of the user that owns this tournament.
+    ownerId: ID
+    # If true, filter to only tournaments the currently authed user is an admin of
+    isCurrentUserAdmin: Boolean
+    countryCode: String
+    addrState: String
+    afterDate: Timestamp
+    beforeDate: Timestamp
+    computedUpdatedAt: Timestamp
+    name: String
+    venueName: String
+    isFeatured: Boolean
+    isLeague: Boolean
+    hasBannerImages: Boolean
+    activeShops: Boolean
+    regOpen: Boolean
+    past: Boolean
+    published: Boolean
+    publiclySearchable: Boolean
+    staffPicks: Boolean
+    hasOnlineEvents: Boolean
+    upcoming: Boolean
+    videogameIds: [ID]
+    sortByScore: Boolean
+}
+
 type Tournament {
     id: ID
     addrState: String
@@ -195,6 +226,7 @@ type Event {
     rulesetId: Int
     # Settings pulled from the event ruleset, if one exists
     rulesetSettings: JSON @deprecated( reason: "Use ruleset" )
+    slug: String
 
     # Paginated stations on this event
     #
