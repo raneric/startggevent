@@ -28,7 +28,10 @@ android {
         val properties = Properties()
         properties.load(secureProperties.inputStream())
         val apiToken = properties.getProperty("API_TOKEN") ?: ""
+        val urlEndpoint = properties.getProperty("URL_ENDPOINT") ?: ""
+
         buildConfigField(type = "String", name = "API_TOKEN", value = apiToken)
+        buildConfigField(type = "String", name = "URL_ENDPOINT", value = urlEndpoint)
     }
 
     buildTypes {

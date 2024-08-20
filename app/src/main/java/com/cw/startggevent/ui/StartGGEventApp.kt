@@ -52,7 +52,7 @@ fun StartGGEventApp(appState: StartGGEventAppState, modifier: Modifier = Modifie
         },
         modifier = modifier
     ) { paddingValues ->
-  /*      Surface(
+        Surface(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
@@ -65,7 +65,7 @@ fun StartGGEventApp(appState: StartGGEventAppState, modifier: Modifier = Modifie
                     TournamentCard()
                 }
             }
-        }*/
+        }
     }
 }
 
