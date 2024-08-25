@@ -76,3 +76,5 @@ val surfaceContainerHighestDark = Color(0xFF343536)
 
 val greenOkStatus = Color(0xFF0D8225)
 val redNOKStatus = Color(0XFFE0225B)
+val fabAccentColor = Color(0xFFFFD033)
+val fabDarkAccentColor = Color(0XFF473DC4)

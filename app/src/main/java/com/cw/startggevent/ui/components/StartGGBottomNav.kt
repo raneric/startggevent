@@ -7,9 +7,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.cw.startggevent.ui.core.shapes.NavigationBarShape
 import com.cw.startggevent.ui.theme.StartGGEventTheme
 import com.cw.startggevent.utils.Destination
 
@@ -19,7 +22,15 @@ fun BottomNavigation(
     onDestinationClicked: (Destination) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    NavigationBar(modifier = modifier.fillMaxWidth()) {
+    NavigationBar(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(
+                NavigationBarShape(
+                    fabSize = 80.dp
+                )
+            )
+    ) {
         bottomNavItemList.forEach { destination ->
             NavigationBarItem(
                 selected = destination == activeDestination,
@@ -42,13 +53,13 @@ fun BottomNavigation(
 private fun StartGGBottomNavPreview() {
     StartGGEventTheme {
         BottomNavigation(
-            activeDestination = Destination.Home,
+            activeDestination = Destination.Tournament,
             onDestinationClicked = {})
     }
 }
 
+
 private val bottomNavItemList = listOf(
-    Destination.Home,
     Destination.Tournament,
     Destination.Profile
 )

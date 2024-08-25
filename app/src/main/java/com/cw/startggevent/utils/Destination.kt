@@ -9,12 +9,6 @@ sealed class Destination(
     @DrawableRes val icon: Int,
     @StringRes val label: Int
 ) {
-    object Home : Destination(
-        route = "home",
-        icon = R.drawable.home,
-        label = R.string.label_home
-    )
-
     object Tournament : Destination(
         route = "event",
         icon = R.drawable.tournament,

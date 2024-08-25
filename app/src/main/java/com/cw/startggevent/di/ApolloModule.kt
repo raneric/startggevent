@@ -14,7 +14,7 @@ object ApolloModule {
     @Provides
     fun provideApolloClient() = ApolloClient.Builder()
         .serverUrl(BuildConfig.URL_ENDPOINT)
-        .addHttpHeader(name = "Authorization", BuildConfig.API_TOKEN)
+        .addHttpHeader(name = "Authorization", "Bearer ${BuildConfig.API_TOKEN}")
         .build()
 
 }

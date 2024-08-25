@@ -12,15 +12,15 @@ query TournamentsByCountry($cCode: String!, $perPage: Int!) {
             isRegistrationOpen
             mapsPlaceId
             numAttendees
-            lat
-            lng
+            startAt
+            endAt
             images {
                 url
             }
             events{
-                createdAt
                 name
                 slug
+                startAt
                 images {
                     url
                 }

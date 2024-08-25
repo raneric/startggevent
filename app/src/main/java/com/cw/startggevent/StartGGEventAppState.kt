@@ -32,14 +32,13 @@ class StartGGEventAppState(
     val snackbarHostState: SnackbarHostState,
 ) {
     val activeDestination
-        @Composable get() = navController.currentDestination?.activeItem ?: Destination.Home
+        @Composable get() = navController.currentDestination?.activeItem ?: Destination.Tournament
 }
 
 val NavDestination.activeItem: Destination
     get() {
         return when (route) {
-            Destination.Tournament.route -> Destination.Tournament
-            Destination.Profile.route    -> Destination.Profile
-            else                         -> Destination.Home
+            Destination.Profile.route -> Destination.Profile
+            else                      -> Destination.Tournament
         }
     }

@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">StartGGEvent</string>
+    <string name="app_name">Start GG</string>
     <string name="label_home">Home</string>
     <string name="label_tournament">Tournament</string>
     <string name="label_profile">Profile</string>
+    <string name="label_search">Search</string>
 </resources>

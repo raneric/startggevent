@@ -1,4 +1,4 @@
-package com.cw.startggevent.ui.commonUI
+package com.cw.startggevent.ui.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -80,6 +80,8 @@ dependencies {
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.material3.winsizeclass)
     implementation(libs.androidx.compose.fondation)
+    implementation(libs.androidx.graphics.shapes)
+    implementation(libs.androidx.hilt.navigation)
     kapt(libs.dagger.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

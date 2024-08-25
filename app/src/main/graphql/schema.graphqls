@@ -227,7 +227,8 @@ type Event {
     # Settings pulled from the event ruleset, if one exists
     rulesetSettings: JSON @deprecated( reason: "Use ruleset" )
     slug: String
-
+    startAt: Timestamp
+    images(type: String): [Image]
     # Paginated stations on this event
     #
     # Arguments
